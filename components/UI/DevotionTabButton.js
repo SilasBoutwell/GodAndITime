@@ -1,8 +1,7 @@
-import { useNavigation, useTheme } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { View, TouchableOpacity, StyleSheet, Platform, Animated } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faAdd } from '@fortawesome/free-solid-svg-icons';
-import { GlobalStyles } from '../../constants/styles';
 import { useEffect, useRef } from 'react';
 
 function DevotionTabButton({ props, color }) {

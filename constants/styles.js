@@ -17,7 +17,7 @@ export const GlobalStyles = {
     Secondary500: '#755AD8',
 
     // 🌟 Accent (Golden tones — light, warmth, call to action)
-    Accent50: '#FEF9E7FF',   // soft glow
+    Accent50: '#FFFBECFF',   // soft glow
     Accent100: '#FEF5D9',   // soft glow
     Accent300: '#F6B860',   // sunbeam amber
     Accent500: '#D99639',   // bold gold
@@ -47,7 +47,7 @@ export const GlobalStyles = {
     TextDisabled: '#999999',
 
     // Backgrounds
-    BackgroundColor: '#FFFCF5FF',
+    BackgroundColor: '#FFFEFBFF',
     BackgroundCard: '#FAFAFC',
     shadowLight: 'rgba(0, 0, 0, 0.05)',
     shadowMedium: 'rgba(0, 0, 0, 0.1)',
