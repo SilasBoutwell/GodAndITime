@@ -1,20 +1,19 @@
 import { View, Text, StyleSheet } from 'react-native';
 
-function VersionInfo() {
+function PrivacyData({ bgColor }) {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>VersionInfo</Text>
+    <View style={[styles.container, { backgroundColor: bgColor }]}>
+      <Text style={styles.title}>Privacy & Data</Text>
       <Text style={styles.subtitle}>This is a placeholder screen.</Text>
     </View>
   );
 };
 
-export default VersionInfo;
+export default PrivacyData;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F7FAFC',
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,

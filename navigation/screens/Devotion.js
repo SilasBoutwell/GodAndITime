@@ -1,20 +1,18 @@
 
-
 import { View, Text, StyleSheet } from 'react-native';
 
-import { GlobalStyles } from '../constants/styles';
-
-function Share({ bgColor }) {
+function Devotion({ bgColor }) {
   return (
     <View style={[{ flex: 1, justifyContent: 'center', alignItems: 'center' }, styles.container, { backgroundColor: bgColor }]}>
-      <Text>Share with friends Screen</Text>
+      <Text>Devotion Screen</Text>
     </View>
   );
 }
 
-export default Share;
+export default Devotion;
 
 const styles = StyleSheet.create({
   container: {
+
   }
 });

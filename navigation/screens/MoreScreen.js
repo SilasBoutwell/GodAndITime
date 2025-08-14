@@ -7,18 +7,18 @@ import { faEnvelope, faFileLines } from '@fortawesome/free-regular-svg-icons';
 import MoreButton from '../../components/UI/MoreButton';
 
 const MoreScreen = ({ bgColor }) => {
-  const items = [
-    { label: 'Settings', icon: faCog, onPress: () => navigation.navigate('Settings') },
-    { label: 'About', icon: faCircleInfo, onPress: () => navigation.navigate('About') },
-    { label: 'App Walkthrough', icon: faPersonWalking },
-    { label: 'Contact & Support', icon: faEnvelope, onPress: () => navigation.navigate('ContactSupport') },
-    { label: 'Privacy & Data', icon: faLock, onPress: () => navigation.navigate('PrivacyData') },
-    { label: 'Version Info', icon: faFileLines, onPress: () => navigation.navigate('VersionInfo') },
-  ];
-
   const verseOpacity = useRef(new Animated.Value(0)).current;
   const verseTranslateY = useRef(new Animated.Value(30)).current;
   const navigation = useNavigation();
+
+  const items = [
+    { label: 'Settings', icon: faCog, onPress: () => navigation.navigate('SettingsStack') },
+    { label: 'About', icon: faCircleInfo, onPress: () => navigation.navigate('AboutStack') },
+    { label: 'App Walkthrough', icon: faPersonWalking },
+    { label: 'Contact & Support', icon: faEnvelope, onPress: () => navigation.navigate('ContactSupportStack') },
+    { label: 'Privacy & Data', icon: faLock, onPress: () => navigation.navigate('PrivacyDataStack') },
+    { label: 'Version Info', icon: faFileLines, onPress: () => navigation.navigate('VersionInfoStack') },
+  ];
 
   useEffect(() => {
     Animated.parallel([

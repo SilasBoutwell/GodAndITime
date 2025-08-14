@@ -1,8 +1,8 @@
 import { View, Text, StyleSheet } from 'react-native';
 
-function About() {
+function About({ bgColor }) {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: bgColor }]}>
       <Text style={styles.title}>About</Text>
       <Text style={styles.subtitle}>This is a placeholder screen.</Text>
     </View>
@@ -14,7 +14,6 @@ export default About;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F7FAFC',
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,

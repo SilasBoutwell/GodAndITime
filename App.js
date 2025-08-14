@@ -11,16 +11,17 @@ import { NavigationContainer } from '@react-navigation/native';
 import { GlobalStyles } from './constants/styles';
 import IconButton from './components/UI/IconButton';
 import DevotionTabButton from './components/UI/DevotionTabButton';
-import Home from './screens/Home';
-import Profile from './screens/Profile';
-import Devotion from './screens/Devotion';
-import Share from './screens/Share';
-import MoreScreen from './screens/MoreScreens/MoreScreen';
-import Settings from './screens/MoreScreens/Settings';
-import About from './screens/MoreScreens/About';
-import ContactSupport from './screens/MoreScreens/ContactSupport';
-import PrivacyData from './screens/MoreScreens/PrivacyData';
-import VersionInfo from './screens/MoreScreens/VersionInfo';
+import Home from './navigation/screens/Home';
+import Profile from './navigation/screens/Profile';
+import Devotion from './navigation/screens/Devotion';
+import Share from './navigation/screens/Share';
+import MoreScreen from './navigation/screens/MoreScreen';
+import Settings from './navigation/screens/MoreScreens/Settings';
+import About from './navigation/screens/MoreScreens/About';
+import ContactSupport from './navigation/screens/MoreScreens/ContactSupport';
+import PrivacyData from './navigation/screens/MoreScreens/PrivacyData';
+import VersionInfo from './navigation/screens/MoreScreens/VersionInfo';
+
 
 const Stack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -35,24 +36,13 @@ function AppNavigation() {
       <RootStack.Navigator screenOptions={{ headerShown: false }}>
         <RootStack.Screen name="Tabs" component={BottomTabs} />
         <RootStack.Screen name="DevotionStack" component={DevotionStack} />
-        <RootStack.Screen name="MoreNavigator" component={MoreNavigator} />
+        <RootStack.Screen name="SettingsStack" component={SettingsStack} />
+        <RootStack.Screen name="AboutStack" component={AboutStack} />
+        <RootStack.Screen name="ContactSupportStack" component={ContactSupportStack} />
+        <RootStack.Screen name="PrivacyDataStack" component={PrivacyDataStack} />
+        <RootStack.Screen name="VersionInfoStack" component={VersionInfoStack} />
       </RootStack.Navigator>
     </NavigationContainer>
-  );
-}
-
-function MoreNavigator() {
-  return (
-    <Stack.Navigator
-      screenOptions={{ headerShown: false }}
-    >
-      <Stack.Screen name="More">{props => <MoreScreen {...props} bgColor={bgColor} />}</Stack.Screen>
-      <Stack.Screen name="Settings" component={Settings} />
-      <Stack.Screen name="About" component={About} />
-      <Stack.Screen name="ContactSupport" component={ContactSupport} />
-      <Stack.Screen name="PrivacyData" component={PrivacyData} />
-      <Stack.Screen name="VersionInfo" component={VersionInfo} />
-    </Stack.Navigator>
   );
 }
 
@@ -70,10 +60,124 @@ function DevotionStack() {
         options={{
           title: 'Devotion',
           headerShown: true,
-          headerBackTitle: 'Back',
+          headerBackTitle: '',
         }}
       >
         {props => <Devotion {...props} bgColor={bgColor} />}
+      </Stack.Screen>
+    </Stack.Navigator>
+  );
+}
+
+function SettingsStack() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerTintColor: tintColor,
+        headerStyle: { backgroundColor: navigationColor },
+        headerTitleStyle: { color: 'black', fontWeight: 'bold', fontSize: 18 },
+      }}
+    >
+      <Stack.Screen
+        name="Settings"
+        options={{
+          title: 'Settings',
+          headerShown: true,
+          headerBackTitle: '',
+        }}>
+        {props => <Settings {...props} bgColor={bgColor} />}
+      </Stack.Screen>
+    </Stack.Navigator>
+  )
+}
+
+function AboutStack() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerTintColor: tintColor,
+        headerStyle: { backgroundColor: navigationColor },
+        headerTitleStyle: { color: 'black', fontWeight: 'bold', fontSize: 18 },
+      }}
+    >
+      <Stack.Screen
+        name="About"
+        options={{
+          title: 'About',
+          headerShown: true,
+          headerBackTitle: '',
+        }}
+      >
+        {props => <About {...props} bgColor={bgColor} />}
+      </Stack.Screen>
+    </Stack.Navigator>
+  );
+}
+
+function ContactSupportStack() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerTintColor: tintColor,
+        headerStyle: { backgroundColor: navigationColor },
+        headerTitleStyle: { color: 'black', fontWeight: 'bold', fontSize: 18 },
+      }}
+    >
+      <Stack.Screen
+        name="ContactSupport"
+        options={{
+          title: 'Contact & Support',
+          headerShown: true,
+          headerBackTitle: '',
+        }}
+      >
+        {props => <ContactSupport {...props} bgColor={bgColor} />}
+      </Stack.Screen>
+    </Stack.Navigator>
+  );
+}
+
+function PrivacyDataStack() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerTintColor: tintColor,
+        headerStyle: { backgroundColor: navigationColor },
+        headerTitleStyle: { color: 'black', fontWeight: 'bold', fontSize: 18 },
+      }}
+    >
+      <Stack.Screen
+        name="PrivacyData"
+        options={{
+          title: 'Privacy & Data',
+          headerShown: true,
+          headerBackTitle: '',
+        }}
+      >
+        {props => <PrivacyData {...props} bgColor={bgColor} />}
+      </Stack.Screen>
+    </Stack.Navigator>
+  );
+}
+
+function VersionInfoStack() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerTintColor: tintColor,
+        headerStyle: { backgroundColor: navigationColor },
+        headerTitleStyle: { color: 'black', fontWeight: 'bold', fontSize: 18 },
+      }}
+    >
+      <Stack.Screen
+        name="VersionInfo"
+        options={{
+          title: 'Version Info',
+          headerShown: true,
+          headerBackTitle: '',
+        }}
+      >
+        {props => <VersionInfo {...props} bgColor={bgColor} />}
       </Stack.Screen>
     </Stack.Navigator>
   );
@@ -146,7 +250,7 @@ function BottomTabs() {
         {props => <Profile {...props} bgColor={bgColor} />}
       </BottomTab.Screen>
       <BottomTab.Screen
-        name="MoreNavigator"
+        name="More"
         options={{
           tabBarIcon: ({ color, size }) => (
             <FontAwesomeIcon icon={faBars} size={size} color={color} />
@@ -154,7 +258,7 @@ function BottomTabs() {
           title: 'More',
         }}
       >
-        {props => <MoreNavigator {...props} bgColor={bgColor} />}
+        {props => <MoreScreen {...props} bgColor={bgColor} />}
       </BottomTab.Screen>
     </BottomTab.Navigator >
   );
