@@ -2,6 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faHouse as fHr, faUser as fUr } from '@fortawesome/free-regular-svg-icons';
 import { faBars, faHouse as fHB, faUser as fUB, faAdd, faUserGroup } from '@fortawesome/free-solid-svg-icons';
+import { auth } from './firebase';
+import { useEffect, useState } from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
@@ -21,7 +23,11 @@ import About from './navigation/screens/MoreScreens/About';
 import ContactSupport from './navigation/screens/MoreScreens/ContactSupport';
 import PrivacyData from './navigation/screens/MoreScreens/PrivacyData';
 import VersionInfo from './navigation/screens/MoreScreens/VersionInfo';
-
+import Preferences from './navigation/screens/MoreScreens/SettingsScreens/Preferences';
+import Theme from './navigation/screens/MoreScreens/SettingsScreens/Theme';
+import ProfileManagement from './navigation/screens/MoreScreens/SettingsScreens/ProfileManagement';
+import Login from './navigation/screens/Login';
+import Register from './navigation/screens/Register';
 
 const Stack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -31,16 +37,34 @@ const navigationColor = GlobalStyles.colors.Accent50;
 const bgColor = GlobalStyles.colors.BackgroundColor;
 
 function AppNavigation() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+      setUser(currentUser);
+    });
+    return unsubscribe;
+  }, []);
+
   return (
     <NavigationContainer>
       <RootStack.Navigator screenOptions={{ headerShown: false }}>
-        <RootStack.Screen name="Tabs" component={BottomTabs} />
-        <RootStack.Screen name="DevotionStack" component={DevotionStack} />
-        <RootStack.Screen name="SettingsStack" component={SettingsStack} />
-        <RootStack.Screen name="AboutStack" component={AboutStack} />
-        <RootStack.Screen name="ContactSupportStack" component={ContactSupportStack} />
-        <RootStack.Screen name="PrivacyDataStack" component={PrivacyDataStack} />
-        <RootStack.Screen name="VersionInfoStack" component={VersionInfoStack} />
+        {user ? (
+          <>
+            <RootStack.Screen name="Tabs" component={BottomTabs} />
+            <RootStack.Screen name="DevotionStack" component={DevotionStack} />
+            <RootStack.Screen name="SettingsStack" component={SettingsStack} />
+            <RootStack.Screen name="AboutStack" component={AboutStack} />
+            <RootStack.Screen name="ContactSupportStack" component={ContactSupportStack} />
+            <RootStack.Screen name="PrivacyDataStack" component={PrivacyDataStack} />
+            <RootStack.Screen name="VersionInfoStack" component={VersionInfoStack} />
+          </>
+        ) : (
+          <>
+            <RootStack.Screen name="Login" component={Login} />
+            <RootStack.Screen name="Register" component={Register} />
+          </>
+        )}
       </RootStack.Navigator>
     </NavigationContainer>
   );
@@ -80,15 +104,33 @@ function SettingsStack() {
     >
       <Stack.Screen
         name="Settings"
-        options={{
-          title: 'Settings',
-          headerShown: true,
-          headerBackTitle: '',
-        }}>
+        options={{ title: 'Settings', headerShown: true, headerBackTitle: '' }}
+      >
         {props => <Settings {...props} bgColor={bgColor} />}
       </Stack.Screen>
+
+      <Stack.Screen
+        name="Preferences"
+        options={{ title: 'App Preferences', headerShown: true, headerBackTitle: '' }}
+      >
+        {props => <Preferences {...props} bgColor={bgColor} />}
+      </Stack.Screen>
+
+      <Stack.Screen
+        name="Theme"
+        options={{ title: 'Theme', headerShown: true, headerBackTitle: '' }}
+      >
+        {props => <Theme {...props} bgColor={bgColor} />}
+      </Stack.Screen>
+
+      <Stack.Screen
+        name="ProfileManagement"
+        options={{ title: 'Profile Management', headerShown: true, headerBackTitle: '' }}
+      >
+        {props => <ProfileManagement {...props} bgColor={bgColor} />}
+      </Stack.Screen>
     </Stack.Navigator>
-  )
+  );
 }
 
 function AboutStack() {

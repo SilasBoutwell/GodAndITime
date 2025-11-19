@@ -1,0 +1,30 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // User profiles
+    match /users/{userId} {
+      // Allow a signed-in user to read/write only their own document
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Example: public content (like posts or announcements)
+    match /posts/{postId} {
+      // Anyone can read posts
+      allow read: if true;
+      // Only signed-in users can create posts
+      allow create: if request.auth != null;
+      // Only the author can edit/delete their post
+      allow update, delete: if request.auth != null && request.auth.uid == resource.data.authorId;
+    }
+
+    // Example: stats or shared data
+    match /stats/{docId} {
+      // Readable by anyone
+      allow read: if true;
+      // Writable only by admins (custom claim)
+      allow write: if request.auth != null && request.auth.token.admin == true;
+    }
+  }
+}
